@@ -70,18 +70,17 @@ async def next_page(bot, query):
             for file in files
         ]
     else:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"{file.file_name}", callback_data=f'files#{file.file_id}'
-                ),
-                InlineKeyboardButton(
-                    text=f"{get_size(file.file_size)}",
-                    callback_data=f'files_#{file.file_id}',
-                ),
-            ]
-            for file in files
+        btn.insert(0, 
+        [
+            InlineKeyboardButton(f'{search}', 'dupe')
         ]
+    )
+    btn.insert(1,
+        [
+            InlineKeyboardButton(f'ᴛᴏᴛᴀʟ ꜰɪʟᴇꜱ: {len(files)}', 'dupe'),
+            InlineKeyboardButton(f'ᴛɪᴩꜱ', 'tips')
+        ]
+    )
 
     if 0 < offset <= 10:
         off_set = 0
@@ -91,7 +90,7 @@ async def next_page(bot, query):
         off_set = offset - 10
     if n_offset == 0:
         btn.append(
-            [InlineKeyboardButton("𝐁𝐀𝐂𝐊", callback_data=f"next_{req}_{key}_{off_set}"),
+             [InlineKeyboardButton("𝐁𝐀𝐂𝐊",f'allback_data=f"next_{req}_{key}_{off_set}"),
              InlineKeyboardButton(f"𝐏𝐀𝐆𝐄𝐒 {round(int(offset) / 10) + 1} / {round(total / 10)}",
                                   callback_data="pages")]
         )
